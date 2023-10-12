@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Annotated
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import async_session, engine, Base
@@ -64,7 +65,7 @@ async def read_user(user_id: int, db: AsyncSession = Depends(get_db)):
     return user
 
 
-@app.put("/users/{user_id}")
+@app.put("/users/{user_id}", response_model=User)
 async def update_existing_user(user_id: int, user_data: UserUpdate, db: AsyncSession = Depends(get_db)):
     user = await update_user(db, user_id, user_data)
     if user is None:
@@ -79,7 +80,7 @@ async def delete_existing_user(user_id: int, db: AsyncSession = Depends(get_db))
 
 
 @app.get("/users/", response_model=List[User])
-async def list_users_route(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(get_db)):
+async def users_list(skip: int = 0, limit: int = 10, db: AsyncSession = Depends(get_db)):
     users = await list_users(db, skip, limit)
     return users
 
@@ -91,4 +92,4 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     loop.run_until_complete(create_tables())
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8008, reload=True)
