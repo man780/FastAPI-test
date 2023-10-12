@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class UserBase(BaseModel):
@@ -17,7 +17,3 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
     id: int
-
-
-class UserList(BaseModel):
-    users: list[User]
