@@ -6,11 +6,17 @@ from schemas.user import UserCreate, UserUpdate
 
 
 async def create_user(db: AsyncSession, user: UserCreate):
-    user = UserModel(**user.dict())
-    db.add(user)
-    await db.commit()
-    await db.refresh(user)
-    return user
+    try:
+        user = UserModel(**user.dict())
+        db.add(user)
+        await db.commit()
+        await db.refresh(user)
+        return user
+    except Exception as ex:
+        raise HTTPException(
+            status_code=400,
+            detail=dict(error_message=f"{ex}")
+        )
 
 
 async def get_user(db: AsyncSession, user_id: int):
@@ -40,7 +46,7 @@ async def update_user(db: AsyncSession, user_id: int, user_data: UserUpdate):
         )
 
 
-async def delete_user(db: AsyncSession, user_id: int):
+async def delete_user(db: AsyncSession, user_id: int) -> None:
     try:
         deleted_stmt = (
             delete(UserModel.__table__)
@@ -56,11 +62,13 @@ async def delete_user(db: AsyncSession, user_id: int):
         )
 
 
-async def list_users(db: AsyncSession, skip: int = 0, limit: int = 10):
+async def list_users(db: AsyncSession, skip: int = 0, limit: int = 10) -> list:
     try:
         query = await db.execute(UserModel.__table__.select().offset(skip).limit(limit))
         users = query.fetchall()
         return users
     except Exception as ex:
-        print(f"{ex}")
-        return list()
+        raise HTTPException(
+            status_code=400,
+            detail=dict(error_message=f"{ex}")
+        )
