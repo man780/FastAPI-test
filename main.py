@@ -21,7 +21,23 @@ async def create_tables():
         await conn.run_sync(Base.metadata.create_all)
 
 
-app = FastAPI()
+description = """
+Ax Technology API helps you do awesome stuff. 🚀
+
+## Users CRUD via APIs
+
+You can **read items**.
+"""
+
+app = FastAPI(
+    title="Ax Technology test",
+    version="1.0.0",
+    description=description,
+    contact={
+        "name": "Tatibaev Murat",
+        "email": "tatibaevmurod@gmail.com",
+    },
+)
 
 
 @app.get("/health/check")
