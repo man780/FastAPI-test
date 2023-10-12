@@ -1,7 +1,6 @@
-from typing import List, Annotated
+from typing import List
 
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import async_session, engine, Base
