@@ -24,9 +24,14 @@ async def create_tables():
 description = """
 Ax Technology API helps you do awesome stuff. 🚀
 
-## Users CRUD via APIs
+## Users CRUD and List via APIs
 
-You can **read items**.
+You can: 
+- create user
+- read user
+- update user
+- delete user
+- see user list
 """
 
 app = FastAPI(
@@ -37,10 +42,11 @@ app = FastAPI(
         "name": "Tatibaev Murat",
         "email": "tatibaevmurod@gmail.com",
     },
+    openapi_url="/api/v1/openapi.json"
 )
 
 
-@app.get("/health/check")
+@app.get("/health/check", tags=["System"])
 def root():
     return {"success": True}
 
