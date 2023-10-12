@@ -1,3 +1,4 @@
+import time
 import uvicorn
 import asyncio
 
@@ -38,6 +39,9 @@ app.include_router(user.router)
 if __name__ == "__main__":
 
     loop = asyncio.get_event_loop()
+    start = time.time()
     loop.run_until_complete(create_tables())
+    end = time.time()
+    print("Time elapsed: ", end - start)
 
     uvicorn.run("main:app", host="0.0.0.0", port=8008, reload=True)
