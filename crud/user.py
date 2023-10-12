@@ -1,8 +1,19 @@
+import logging
+from logging.handlers import RotatingFileHandler
+
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import update, delete
 from models.user import User as UserModel
 from schemas.user import UserCreate, UserUpdate
+
+
+file_handler = RotatingFileHandler("logs/crud.log", maxBytes=1024000, backupCount=3)
+file_handler.setLevel(logging.INFO)
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_handler.setFormatter(formatter)
+logging.getLogger().addHandler(file_handler)
+logger = logging.getLogger(__name__)
 
 
 async def create_user(db: AsyncSession, user: UserCreate):
@@ -13,6 +24,7 @@ async def create_user(db: AsyncSession, user: UserCreate):
         await db.refresh(user)
         return user
     except Exception as ex:
+        logger.error(f"Error on user create: {ex}")
         raise HTTPException(
             status_code=400,
             detail=dict(error_message=f"{ex}")
