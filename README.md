@@ -24,3 +24,12 @@ python main.py
 
 ### Go to link in localhost
 [http://0.0.0.0:8009](http://0.0.0.0:8009)
+
+
+### Tests
+I used pytest with `conftest.py` for testing API routers
+
+```commandline
+pytest
+```
+Run command above to run testing routers
