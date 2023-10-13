@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from db_config import get_db
+from models.user import User as UserModel
 
 router = APIRouter(
     tags=["System"],
@@ -19,7 +20,7 @@ def health_check():
 @router.get("/health/check/db")
 async def db_check_health(db: AsyncSession = Depends(get_db)):
     try:
-        await db.execute("SELECT 1")
+        await db.execute(UserModel.__table__.select())
         return {
             "status": True,
             "message": "DB connection is: OK"

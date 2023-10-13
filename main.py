@@ -44,4 +44,4 @@ if __name__ == "__main__":
     end = time.time()
     print("Time elapsed: ", end - start)
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8008, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8009, reload=True)
