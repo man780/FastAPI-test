@@ -33,3 +33,11 @@ def test_user_update(test_app, random_user_data):
     assert response_data["email"] == random_user_data.get("email")
     assert response_data["full_name"] == random_user_data.get("full_name")
     assert response_data["id"] == user_id
+
+
+def test_user_delete(test_app):
+    user_id = 3
+    response = test_app.delete(
+        f"/user/delete/{user_id}",
+    )
+    assert response.status_code == 404

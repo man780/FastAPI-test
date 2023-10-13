@@ -19,4 +19,8 @@ def random_user_data():
     username = fake.user_name()
     email = fake.email()
     full_name = fake.name()
-    return {"username": username, "email": email, "full_name": full_name}
+    return {
+        "username": username,
+        "email": email,
+        "full_name": full_name
+    }
