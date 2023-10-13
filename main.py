@@ -29,7 +29,7 @@ app = FastAPI(
         "name": "Tatibaev Murat",
         "email": "tatibaevmurod@gmail.com",
     },
-    openapi_url="/api/v1/openapi.json"
+    openapi_url="/api/v1/openapi.json",
 )
 
 
@@ -37,7 +37,6 @@ app.include_router(system.router)
 app.include_router(user.router)
 
 if __name__ == "__main__":
-
     loop = asyncio.get_event_loop()
     start = time.time()
     loop.run_until_complete(create_tables())

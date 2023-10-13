@@ -1,8 +1,5 @@
 def test_user_create(test_app, random_user_data):
-    response = test_app.post(
-        "/user/create",
-        json=random_user_data
-    )
+    response = test_app.post("/user/create", json=random_user_data)
     assert response.status_code == 200
     response_data = response.json()
     assert response_data["username"] == random_user_data.get("username")
@@ -23,10 +20,7 @@ def test_user_get(test_app):
 
 def test_user_update(test_app, random_user_data):
     user_id = 2
-    response = test_app.put(
-        f"/user/update/{user_id}",
-        json=random_user_data
-    )
+    response = test_app.put(f"/user/update/{user_id}", json=random_user_data)
     assert response.status_code == 200
     response_data = response.json()
     assert response_data["username"] == random_user_data.get("username")
