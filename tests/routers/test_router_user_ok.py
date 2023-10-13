@@ -41,3 +41,24 @@ def test_user_delete(test_app):
         f"/user/delete/{user_id}",
     )
     assert response.status_code == 404
+
+
+def test_users_list(test_app):
+    response = test_app.get("/user/list")
+    assert response.status_code == 200
+    response_data = response.json()
+    assert len(response_data) > 0
+    for user in response_data:
+        # Check for each item is DICT
+        assert type(user) == type(dict())
+
+
+def test_users_list_items(test_app):
+    response = test_app.get("/user/list")
+    response_data = response.json()
+    assert len(response_data) > 0
+    for user in response_data:
+        # Check for each item has keys
+        assert type(user.get("username")) == type(str())
+        assert type(user.get("email")) == type(str())
+        assert type(user.get("fullname")) == type(str()) or type(None)
