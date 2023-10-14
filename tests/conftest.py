@@ -16,6 +16,10 @@ def test_app():
 
 @pytest.fixture
 def random_user_data():
+    """
+
+    :return: dict
+    """
     username = fake.user_name()
     email = fake.email()
     full_name = fake.name()

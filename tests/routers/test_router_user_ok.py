@@ -44,7 +44,7 @@ def test_users_list(test_app):
     assert len(response_data) > 0
     for user in response_data:
         # Check for each item is DICT
-        assert type(user) == type(dict())
+        assert isinstance(user, type(dict()))
 
 
 def test_users_list_items(test_app):
@@ -53,6 +53,5 @@ def test_users_list_items(test_app):
     assert len(response_data) > 0
     for user in response_data:
         # Check for each item has keys
-        assert type(user.get("username")) == type(str())
-        assert type(user.get("email")) == type(str())
-        assert type(user.get("fullname")) == type(str()) or type(None)
+        assert isinstance(user.get("username"), type(str()))
+        assert isinstance(user.get("email"), type(str()))
