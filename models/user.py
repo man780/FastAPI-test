@@ -7,7 +7,7 @@ from db_config import Base
 
 class User(Base):
     """
-    User model
+    Users table (model)
     """
     __tablename__ = "users"
 

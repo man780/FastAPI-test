@@ -5,22 +5,23 @@ A `RESTfull API` service in Python that will provide CRUD operations for working
 ```bash
 docker-compose up --build
 ```
-or
+<details>
+  <summary>OR</summary>
 
----
-```bash
-python3.10 -m venv venv
-source venv/bin/activate
-```
-install all libs dependencies
-```bash
-pip install -r requirements.txt
-```
-##### then run
-```bash
-python main.py
-```
-----
+  ```bash
+  python3.10 -m venv venv
+  source venv/bin/activate
+  ```
+  install all libs dependencies
+  ```bash
+  pip install -r requirements.txt
+  ```
+  ##### then run
+  ```bash
+  python main.py
+  ```
+</details>
+
 
 ### Go to link in localhost
 [http://127.0.0.1:8009/docs#/](http://127.0.0.1:8009/docs#/)
@@ -54,7 +55,7 @@ Run command above to run testing routers
 - [x] Реализуйте механизм логирования для отслеживания ошибок.
 
 #### Оценка:
-- [x] Качество исходного кода
+- [x] Качество исходного кода `pylint`
 - [x] Соответствие требованиям
 - [x] Полнота и корректность тестов. `pytest`
 - [x] Стиль кодирования и соблюдение стандартов: `DONE` with `black`
