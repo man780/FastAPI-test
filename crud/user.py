@@ -98,19 +98,32 @@ async def delete_user(db: AsyncSession, user_id: int) -> None:
 
 
 async def list_users(
-    db: AsyncSession, skip: int = 0, limit: int = 10
+    db: AsyncSession, skip: int = 0, limit: int = 10, username: str = "", sort_by: str = None,
 ) -> Sequence[Row[Any]]:
     """
-    Get users list
-
+    Get users list with filtering and sorting
     :param db:
     :param skip:
     :param limit:
+    :param username:
+    :param sort_by:
     :return:
     """
     try:
-        query = await db.execute(UserModel.__table__.select().offset(skip).limit(limit))
-        users = query.fetchall()
+        query = UserModel.__table__.select()
+        # Фильтрация по имени пользователя
+        if username:
+            query = query.filter(UserModel.username == username)
+        # Сортировка
+        if sort_by:
+            if sort_by == "username":
+                query = query.order_by(UserModel.username)
+            elif sort_by == "email":
+                query = query.order_by(UserModel.email)
+        query = query.offset(skip).limit(limit)
+
+        exec_query = await db.execute(query)
+        users = exec_query.fetchall()
         return users
     except Exception as ex:
         logger.error("Error on getting users list: %s", ex)

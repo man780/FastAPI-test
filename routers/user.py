@@ -3,7 +3,7 @@ Routers for user CRUD
 """
 from typing import List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from crud.user import create_user, get_user, delete_user, update_user, list_users
@@ -69,14 +69,19 @@ async def delete_existing_user(user_id: int, db: AsyncSession = Depends(get_db))
 
 @router.get("/list/", response_model=List[User])
 async def users_list(
-    skip: int = 0, limit: int = 10, db: AsyncSession = Depends(get_db)
+    skip: int = 0, limit: int = 10,
+    username: str = Query(None, description="Filter by username"),
+    sort_by: str = Query(None, description="Sort by 'username' or 'email'"),
+    db: AsyncSession = Depends(get_db),
 ):
     """
     Get users list
     :param skip:
     :param limit:
     :param db:
+    :param username:
+    :param sort_by:
     :return:
     """
-    users = await list_users(db, skip, limit)
+    users = await list_users(db, skip, limit, username, sort_by)
     return users
