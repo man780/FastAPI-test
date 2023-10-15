@@ -13,6 +13,12 @@ async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=
 
 
 async def get_db():
+    """get db
+
+    Keyword arguments:
+    argument -- description
+    Return: return_description
+    """
     async_db = async_session()
     try:
         yield async_db
@@ -21,5 +27,10 @@ async def get_db():
 
 
 async def create_tables():
+    """Create table
+    
+    Keyword arguments:
+    Return: return_description
+    """
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
