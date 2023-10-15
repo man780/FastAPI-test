@@ -1,3 +1,6 @@
+"""
+Conftest file
+"""
 import pytest
 
 from starlette.testclient import TestClient
@@ -10,6 +13,10 @@ fake = Faker()
 
 @pytest.fixture(scope="module")
 def test_app():
+    """
+    Fixture for test app
+    :return:
+    """
     client = TestClient(app)
     yield client
 
@@ -17,7 +24,7 @@ def test_app():
 @pytest.fixture
 def random_user_data():
     """
-
+    Fixture for generate random user data
     :return: dict
     """
     username = fake.user_name()
