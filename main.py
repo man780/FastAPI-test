@@ -1,6 +1,9 @@
+"""
+Main file
+"""
 import time
-import uvicorn
 import asyncio
+import uvicorn
 
 from fastapi import FastAPI
 from db_config import create_tables
@@ -8,7 +11,7 @@ from db_config import create_tables
 from routers import user, system
 
 
-description = """
+DESCRIPTION = """
 Ax Technology API helps you do awesome stuff. 🚀
 
 ## Users CRUD and List via APIs
@@ -24,7 +27,7 @@ You can:
 app = FastAPI(
     title="Ax Technology test",
     version="1.0.0",
-    description=description,
+    description=DESCRIPTION,
     contact={
         "name": "Tatibaev Murat",
         "email": "tatibaevmurod@gmail.com",

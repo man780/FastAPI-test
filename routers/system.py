@@ -1,3 +1,6 @@
+"""
+Routers for system enpoints
+"""
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -11,11 +14,20 @@ router = APIRouter(
 
 @router.get("/health/check", tags=["System"])
 def health_check():
+    """
+    Simple health check
+    :return:
+    """
     return {"status": True, "message": "Success"}
 
 
 @router.get("/health/check/db")
 async def db_check_health(db: AsyncSession = Depends(get_db)):
+    """
+    health check: DB connection is OK?
+    :param db:
+    :return:
+    """
     try:
         await db.execute(UserModel.__table__.select())
         return {"status": True, "message": "DB connection is: OK"}

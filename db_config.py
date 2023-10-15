@@ -1,3 +1,6 @@
+"""
+DB config file
+"""
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -10,6 +13,7 @@ async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=
 
 
 async def get_db():
+    """get db"""
     async_db = async_session()
     try:
         yield async_db
@@ -18,5 +22,6 @@ async def get_db():
 
 
 async def create_tables():
+    """Create table"""
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
