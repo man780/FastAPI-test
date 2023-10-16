@@ -15,10 +15,7 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     email = Column(String, unique=True)
     full_name = Column(String)
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
+    hashed_password = Column(String)
 
     @classmethod
     def create_user(cls, session, username, email):
@@ -35,14 +32,19 @@ class User(Base):
         return user
 
     @classmethod
-    def get_user_by_username(cls, session, username):
+    async def get_user_by_username(cls, session, username):
         """
         Public method to get a user by their username
         :param session:
         :param username:
         :return:
         """
-        return session.query(cls).filter(cls.username == username).first()
+        # return session.query(cls).filter(cls.username == username).first()
+        result = await session.execute(
+            cls.__table__.select().where(cls.username == username)
+        )
+        user = result.fetchone()
+        return user
 
     def update_email(self, session, new_email):
         """

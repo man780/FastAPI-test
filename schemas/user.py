@@ -22,3 +22,8 @@ class UserUpdate(UserBase):
 class User(UserBase):
     """from User base schema then add id field"""
     id: int
+
+
+class UserInDB(User):
+    """User log in with hashed password"""
+    hashed_password: str

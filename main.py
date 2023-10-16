@@ -11,6 +11,12 @@ from db_config import create_tables
 from routers import user, system
 
 
+import secrets
+
+SECRET_KEY = secrets.token_urlsafe(32)
+ALGORITHM = "HS256"
+
+
 DESCRIPTION = """
 Ax Technology API helps you do awesome stuff. 🚀
 
