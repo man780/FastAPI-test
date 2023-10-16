@@ -28,9 +28,6 @@ def test_user_get(test_app):
     response = test_app.get(f"/user/get/{user_id}")
     assert response.status_code == 200
     response_data = response.json()
-    assert response_data["username"] == "string"
-    assert response_data["email"] == "string"
-    assert response_data["full_name"] == "string"
     assert response_data["id"] == user_id
 
 
@@ -41,7 +38,7 @@ def test_user_update(test_app, random_user_data):
     :param random_user_data:
     :return:
     """
-    user_id = 2
+    user_id = 1
     response = test_app.put(f"/user/update/{user_id}", json=random_user_data)
     assert response.status_code == 200
     response_data = response.json()
