@@ -19,6 +19,7 @@ docker-compose up --build
   ##### then run
   ```bash
   python main.py
+  pytest
   ```
 </details>
 
@@ -31,6 +32,7 @@ docker-compose up --build
 I used pytest with `conftest.py` for testing API routers
 
 ```commandline
+python main.py
 pytest
 ```
 Run command above to run testing routers
