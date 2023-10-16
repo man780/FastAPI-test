@@ -60,6 +60,7 @@ Run command above to run testing routers
 - [x] Полнота и корректность тестов. `pytest`
 - [x] Стиль кодирования и соблюдение стандартов: `DONE` with `black`
 - [x] Опыт использования: 
-  - [ ] SQL
+  - [ ] SQL: 
+    _Тут не сделал_: но есть пример [тут](https://github.com/man780/compose-django-postgres-celery-redis/blob/main/app/education/views.py) 57-строка
   - [x] Git
 - [x] Умение разрабатывать RESTful API
