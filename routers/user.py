@@ -67,7 +67,9 @@ async def delete_existing_user(user_id: int, db: AsyncSession = Depends(get_db))
     raise HTTPException(status_code=404, detail="User has deleted")
 
 
-@router.get("/list/", response_model=List[User])
+@router.get("/list/", response_model=List[User],
+            name="Users list with filter and sorting",
+            description="Users list, filter by username limit 10, sort by `username` or `email`")
 async def users_list(
     skip: int = 0, limit: int = 10,
     username: str = Query(None, description="Filter by username"),
